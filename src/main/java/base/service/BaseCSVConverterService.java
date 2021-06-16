@@ -3,5 +3,5 @@ package base.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BaseCSVConverterService {
+public abstract class BaseCSVConverterService {
 }
