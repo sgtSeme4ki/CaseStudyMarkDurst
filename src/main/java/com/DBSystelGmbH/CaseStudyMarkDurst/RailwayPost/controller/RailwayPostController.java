@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("betriebsstellen/")
+@RequestMapping("betriebsstellen")
 public class RailwayPostController extends BaseController<RailwayPost> {
 
     private final RailwayPostsCSVConverterService railwayPostsCSVConverterService;
@@ -22,7 +22,7 @@ public class RailwayPostController extends BaseController<RailwayPost> {
         this.railwayPostService = railwayPostService;
     }
 
-    @PostMapping("csv-upload")
+    @PostMapping("/csv-upload")
     public void uploadCSVFile(@RequestParam("file") MultipartFile csvFile,
                               @RequestParam(name = "persist") boolean isToBePersisted) {
         if (isToBePersisted) {
@@ -32,7 +32,7 @@ public class RailwayPostController extends BaseController<RailwayPost> {
         }
     }
 
-    @GetMapping("abk/{abbreviation}")
+    @GetMapping("/abk/{abbreviation}")
     public RailwayPost findByAbbreviation(@PathVariable String abbreviation) {
         return railwayPostService.findByAbbreviation(abbreviation);
     }
