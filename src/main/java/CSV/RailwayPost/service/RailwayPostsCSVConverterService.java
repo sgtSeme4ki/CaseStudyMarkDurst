@@ -47,5 +47,10 @@ public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
         return railwayPosts;
     }
 
-
+    private void checkIfPersisted() {
+        if (!super.findAll().isEmpty()) {
+            throw new RuntimeException("There are already railway posts in the database, consider deleting the old" +
+                    " ones first");
+        }
+    }
 }
