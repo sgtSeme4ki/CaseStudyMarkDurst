@@ -27,6 +27,20 @@ public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
         this.transientRailwayPosts = super.findAll();
     }
 
+    public void createRailwayPostsInMemory(MultipartFile file) {
+        // TODO: Implement merging if already persisted?
+        checkIfPersisted();
+        this.transientRailwayPosts = convertCSVToBean(file);
+    }
+
+    public void createRailwayPostsInDatabase(MultipartFile file) {
+        checkIfPersisted();
+        this.transientRailwayPosts = convertCSVToBean(file);
+
+        this.transientRailwayPosts.forEach(railwayPost -> super.create(railwayPost));
+        log.info("Railway posts successfully persisted");
+    }
+
     private List<RailwayPost> convertCSVToBean(MultipartFile file) {
         List<RailwayPost> railwayPosts = new ArrayList<>();
 
