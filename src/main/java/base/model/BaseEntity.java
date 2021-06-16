@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @Getter
@@ -11,4 +12,7 @@ import javax.persistence.MappedSuperclass;
 @EqualsAndHashCode
 @MappedSuperclass
 public class BaseEntity {
+
+    @Id
+    private Long id;
 }
