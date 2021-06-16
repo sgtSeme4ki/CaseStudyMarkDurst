@@ -4,4 +4,6 @@ import base.model.BaseRepository;
 
 public interface RailwayPostRepository extends BaseRepository<RailwayPost> {
     void deleteAll();
+
+    RailwayPost findByAbbreviation(String abbreviation);
 }
