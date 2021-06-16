@@ -43,11 +43,6 @@ public abstract class BaseCSVConverterService<T extends BaseEntity> extends Base
         log.info("Entities successfully persisted");
     }
 
-    public void deleteAll() {
-        repository.deleteAll();
-        log.info("All Entities deleted");
-    }
-
     private List<T> convertCSVToBean(MultipartFile file) {
         List<T> entities = new ArrayList<>();
 
