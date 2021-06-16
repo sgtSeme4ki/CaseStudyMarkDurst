@@ -28,9 +28,6 @@ public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
     }
 
     private List<RailwayPost> convertCSVToBean(MultipartFile file) {
-
-        // TODO: Inconsistenc Handly:
-        //  if persisted == true || transienRailwayPosts != null || !findAll.isEmpty()-> there are already railway posts in database,
         List<RailwayPost> railwayPosts = new ArrayList<>();
 
         try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
