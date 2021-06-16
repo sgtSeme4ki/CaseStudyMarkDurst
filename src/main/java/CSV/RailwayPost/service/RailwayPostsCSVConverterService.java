@@ -21,7 +21,6 @@ import java.util.List;
 public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
 
     private List<RailwayPost> transientRailwayPosts;
-    private boolean persisted = false;
 
     public RailwayPostsCSVConverterService(BaseRepository<RailwayPost> repository) {
         super(repository);
