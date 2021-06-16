@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("betriebsstellen")
+@RequestMapping("betriebsstellen/")
 public class RailwayPostController extends BaseController<RailwayPost> {
 
     private final RailwayPostsCSVConverterService railwayPostsCSVConverterService;
