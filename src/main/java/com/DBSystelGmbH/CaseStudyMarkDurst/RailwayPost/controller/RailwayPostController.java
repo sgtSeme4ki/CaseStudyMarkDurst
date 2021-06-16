@@ -12,23 +12,21 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("betriebsstellen")
 public class RailwayPostController extends BaseController<RailwayPost> {
 
-    private final RailwayPostsCSVConverterService railwayPostsCSVConverterService;
     private final RailwayPostService railwayPostService;
 
     public RailwayPostController(RailwayPostsCSVConverterService railwayPostsCSVConverterService,
                                  RailwayPostService railwayPostService) {
         super(railwayPostService);
-        this.railwayPostsCSVConverterService = railwayPostsCSVConverterService;
         this.railwayPostService = railwayPostService;
     }
 
     @PostMapping("/csv-upload")
-    public void uploadCSVFile(@RequestParam("file") MultipartFile csvFile,
+    public void uploadCSVFile(@RequestBody MultipartFile csvFile,
                               @RequestParam(name = "persist") boolean isToBePersisted) {
         if (isToBePersisted) {
-            this.railwayPostsCSVConverterService.createRailwayPostsInDatabase(csvFile);
+            this.railwayPostService.createRailwayPostsInDatabase(csvFile);
         } else {
-            this.railwayPostsCSVConverterService.createRailwayPostsInMemory(csvFile);
+            this.railwayPostService.createRailwayPostsInMemory(csvFile);
         }
     }
 

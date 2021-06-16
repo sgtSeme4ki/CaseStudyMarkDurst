@@ -4,6 +4,9 @@ import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseEntity;
 import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseRepository;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.enums.CSVReaderNullFieldIndicator;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,9 +22,11 @@ import java.util.List;
 @Slf4j
 public abstract class BaseCSVConverterService<T extends BaseEntity> extends BaseService<T> {
 
-    private final BaseRepository repository;
+    private final BaseRepository<T> repository;
 
-    private List<T> transientEntities;
+    @Getter
+    @Setter
+    protected List<T> transientEntities;
 
     public BaseCSVConverterService(BaseRepository<T> repository) {
         super(repository);
@@ -39,7 +44,7 @@ public abstract class BaseCSVConverterService<T extends BaseEntity> extends Base
         checkIfPersisted();
         this.transientEntities = convertCSVToBean(file);
 
-        this.transientEntities.forEach(entity -> repository.save(entity));
+        this.transientEntities.forEach(repository::save);
         log.info("Entities successfully persisted");
     }
 
@@ -49,6 +54,8 @@ public abstract class BaseCSVConverterService<T extends BaseEntity> extends Base
         try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             CsvToBean<T> csvToBeanBuilder = new CsvToBeanBuilder(reader)
                     .withType(BaseEntity.class)
+                    .withSeparator(';')
+                    .withFieldAsNull(CSVReaderNullFieldIndicator.EMPTY_SEPARATORS)
                     .build();
 
             entities = csvToBeanBuilder.parse();
