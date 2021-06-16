@@ -1,4 +1,4 @@
-package base.model;
+package com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

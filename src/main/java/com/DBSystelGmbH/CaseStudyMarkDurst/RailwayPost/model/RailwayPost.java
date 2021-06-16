@@ -1,6 +1,6 @@
-package CSV.RailwayPost.model;
+package com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model;
 
-import base.model.BaseEntity;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseEntity;
 import com.opencsv.bean.CsvBindByName;
 import lombok.*;
 

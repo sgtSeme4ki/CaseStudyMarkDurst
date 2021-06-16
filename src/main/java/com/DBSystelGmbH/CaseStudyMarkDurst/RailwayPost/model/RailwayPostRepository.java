@@ -1,6 +1,6 @@
-package CSV.RailwayPost.model;
+package com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model;
 
-import base.model.BaseRepository;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseRepository;
 
 public interface RailwayPostRepository extends BaseRepository<RailwayPost> {
     void deleteAll();

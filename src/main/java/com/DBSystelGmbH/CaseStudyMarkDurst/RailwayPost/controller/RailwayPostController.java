@@ -1,9 +1,9 @@
-package CSV.RailwayPost.controller;
+package com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.controller;
 
-import CSV.RailwayPost.model.RailwayPost;
-import CSV.RailwayPost.service.RailwayPostService;
-import CSV.RailwayPost.service.RailwayPostsCSVConverterService;
-import base.controller.BaseController;
+import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPost;
+import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.service.RailwayPostService;
+import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.service.RailwayPostsCSVConverterService;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

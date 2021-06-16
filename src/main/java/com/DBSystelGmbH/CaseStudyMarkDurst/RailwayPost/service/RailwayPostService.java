@@ -1,8 +1,8 @@
-package CSV.RailwayPost.service;
+package com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.service;
 
-import CSV.RailwayPost.model.RailwayPost;
-import CSV.RailwayPost.model.RailwayPostRepository;
-import base.service.BaseService;
+import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPost;
+import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPostRepository;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.service.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

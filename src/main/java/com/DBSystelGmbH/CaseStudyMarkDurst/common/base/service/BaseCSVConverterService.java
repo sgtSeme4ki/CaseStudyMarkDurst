@@ -1,7 +1,7 @@
-package base.service;
+package com.DBSystelGmbH.CaseStudyMarkDurst.common.base.service;
 
-import base.model.BaseEntity;
-import base.model.BaseRepository;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseEntity;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseRepository;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.extern.slf4j.Slf4j;

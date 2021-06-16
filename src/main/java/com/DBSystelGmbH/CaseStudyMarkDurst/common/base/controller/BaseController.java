@@ -1,7 +1,7 @@
-package base.controller;
+package com.DBSystelGmbH.CaseStudyMarkDurst.common.base.controller;
 
-import base.model.BaseEntity;
-import base.service.BaseService;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseEntity;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.service.BaseService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
