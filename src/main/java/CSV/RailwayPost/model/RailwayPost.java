@@ -1,4 +1,4 @@
-package CSV.RailwayStation.model;
+package CSV.RailwayPost.model;
 
 import base.model.BaseEntity;
 import com.opencsv.bean.CsvBindByName;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-public class RailwayStation extends BaseEntity {
+public class RailwayPost extends BaseEntity {
 
     @NotBlank
     @CsvBindByName(column = "Abk")
