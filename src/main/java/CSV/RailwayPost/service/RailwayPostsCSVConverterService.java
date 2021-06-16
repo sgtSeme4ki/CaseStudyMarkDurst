@@ -43,6 +43,10 @@ public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
         log.info("Railway posts successfully persisted");
     }
 
+    public void deleteAll() {
+        railwayPostRepository.deleteAll();
+    }
+
     private List<RailwayPost> convertCSVToBean(MultipartFile file) {
         List<RailwayPost> railwayPosts = new ArrayList<>();
 
