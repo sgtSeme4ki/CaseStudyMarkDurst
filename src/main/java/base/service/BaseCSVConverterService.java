@@ -1,9 +1,13 @@
 package base.service;
 
-import lombok.RequiredArgsConstructor;
+import base.model.BaseEntity;
+import base.model.BaseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
-public abstract class BaseCSVConverterService {
+public abstract class BaseCSVConverterService<T extends BaseEntity> extends BaseService<T> {
+
+    public BaseCSVConverterService(BaseRepository<T> repository) {
+        super(repository);
+    }
 }
