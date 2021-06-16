@@ -1,7 +1,7 @@
 package CSV.RailwayPost.service;
 
 import CSV.RailwayPost.model.RailwayPost;
-import base.model.BaseRepository;
+import CSV.RailwayPost.model.RailwayPostRepository;
 import base.service.BaseService;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -20,10 +20,13 @@ import java.util.List;
 @Service
 public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
 
+    private final RailwayPostRepository railwayPostRepository;
+
     private List<RailwayPost> transientRailwayPosts;
 
-    public RailwayPostsCSVConverterService(BaseRepository<RailwayPost> repository) {
-        super(repository);
+    public RailwayPostsCSVConverterService(RailwayPostRepository railwayPostRepository) {
+        super(railwayPostRepository);
+        this.railwayPostRepository = railwayPostRepository;
         this.transientRailwayPosts = super.findAll();
     }
 
@@ -36,7 +39,7 @@ public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
         checkIfPersisted();
         this.transientRailwayPosts = convertCSVToBean(file);
 
-        this.transientRailwayPosts.forEach(railwayPost -> super.create(railwayPost));
+        this.transientRailwayPosts.forEach(railwayPost -> railwayPostRepository.save(railwayPost));
         log.info("Railway posts successfully persisted");
     }
 
