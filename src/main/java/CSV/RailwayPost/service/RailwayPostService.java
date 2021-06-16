@@ -17,6 +17,10 @@ public class RailwayPostService extends BaseService<RailwayPost> {
         this.railwayPostRepository = railwayPostRepository;
     }
 
+    public RailwayPost findByAbbreviation(String abbreviation) {
+        return railwayPostRepository.findByAbbreviation(abbreviation);
+    }
+
     public void deleteAll() {
         this.railwayPostRepository.deleteAll();
         log.info("All Railway Posts deleted");
