@@ -24,6 +24,7 @@ public class RailwayPostsCSVConverterService extends BaseService<RailwayPost> {
 
     public RailwayPostsCSVConverterService(BaseRepository<RailwayPost> repository) {
         super(repository);
+        this.transientRailwayPosts = super.findAll();
     }
 
     private List<RailwayPost> convertCSVToBean(MultipartFile file) {
