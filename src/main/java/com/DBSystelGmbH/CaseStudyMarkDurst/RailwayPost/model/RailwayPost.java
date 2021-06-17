@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -43,7 +42,6 @@ public class RailwayPost extends BaseEntity {
 
     private String validUntil;
 
-    @NotNull
     private Long netKey;
 
     private Boolean scheduleRelevance;

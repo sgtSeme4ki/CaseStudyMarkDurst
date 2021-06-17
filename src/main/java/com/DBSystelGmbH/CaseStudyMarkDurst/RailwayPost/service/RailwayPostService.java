@@ -2,18 +2,14 @@ package com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.service;
 
 import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPost;
 import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPostRepository;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.CSV.CSVHelper;
 import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.service.BaseService;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,32 +46,49 @@ public class RailwayPostService extends BaseService<RailwayPost> {
 
     public void createRailwayPostsInMemory(MultipartFile file) {
         checkIfPersisted();
-        this.transientRailwayPosts = convertCSVToBean(file);
+        try {
+            this.transientRailwayPosts = convertCSVToBean(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void createRailwayPostsInDatabase(MultipartFile file) {
         checkIfPersisted();
-        this.transientRailwayPosts = convertCSVToBean(file);
+        try {
+            this.transientRailwayPosts = convertCSVToBean(file);
 
-        this.transientRailwayPosts.forEach(railwayPostRepository::save);
-        log.info("Railway posts successfully persisted");
+            this.transientRailwayPosts.forEach(railwayPostRepository::save);
+            log.info("Railway posts successfully persisted");
+        } catch (IOException e) {
+
+        }
     }
 
-    private List<RailwayPost> convertCSVToBean(MultipartFile file) {
+    private List<RailwayPost> convertCSVToBean(MultipartFile file) throws IOException {
         List<RailwayPost> entities = new ArrayList<>();
 
+        try {
+            entities = CSVHelper.csvToRailwayPosts(file.getInputStream());
 
-        try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            CsvToBean<RailwayPost> csvToBeanBuilder = new CsvToBeanBuilder(reader)
-                    .withType(RailwayPost.class)
-                    .build();
-
-            entities = csvToBeanBuilder.parse();
-            log.info("CSV-File successfully converted to Entity-Bean");
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+//        entities = CSVUtils.read(RailwayPost.class, file);
+
+
+//        try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+//            CsvToBean<RailwayPost> csvToBeanBuilder = new CsvToBeanBuilder(reader)
+//                    .withType(RailwayPost.class)
+//                    .build();
+//
+//            entities = csvToBeanBuilder.parse();
+//            log.info("CSV-File successfully converted to Entity-Bean");
+//
+//        } catch (IOException ioException) {
+//            ioException.printStackTrace();
+//        }
         return entities;
     }
 
