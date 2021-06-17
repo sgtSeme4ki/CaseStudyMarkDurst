@@ -44,16 +44,16 @@ public class CSVHelper {
 
             for (CSVRecord csvRecord : csvRecords) {
                 RailwayPost railwayPost = new RailwayPost(
-                        csvRecord.get("Abk"),
-                        csvRecord.get("Name"),
-                        csvRecord.get("Kurzname"),
-                        csvRecord.get("Typ"),
-                        csvRecord.get("Betr-Zust"),
-                        csvRecord.get("Primary location code"),
-                        csvRecord.get("UIC"),
-                        csvRecord.get("RB"),
-                        csvRecord.get("gültig von"),
-                        csvRecord.get("gültig bis"),
+                        csvRecord.get("Abk").trim().replaceAll(" +", " "),
+                        csvRecord.get("Name").trim().replaceAll(" +", " "),
+                        csvRecord.get("Kurzname").trim().replaceAll(" +", " "),
+                        csvRecord.get("Typ").trim().replaceAll(" +", " "),
+                        csvRecord.get("Betr-Zust").trim().replaceAll(" +", " "),
+                        csvRecord.get("Primary location code").trim().replaceAll(" +", " "),
+                        csvRecord.get("UIC").trim().replaceAll(" +", " "),
+                        csvRecord.get("RB").trim().replaceAll(" +", " "),
+                        csvRecord.get("gültig von").trim().replaceAll(" +", " "),
+                        csvRecord.get("gültig bis").trim().replaceAll(" +", " "),
                         Long.valueOf(Optional.ofNullable(csvRecord.get("Netz-Key")).orElseGet(() -> String.valueOf(0L))),
                         Boolean.parseBoolean(csvRecord.get("Fpl-rel")),
                         Boolean.parseBoolean(csvRecord.get("Fpl-Gr"))
