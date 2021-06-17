@@ -33,7 +33,8 @@ public class RailwayPostService extends BaseService<RailwayPost> implements Base
 
         if (findAll().isEmpty()) {
             if (this.transientRailwayPosts.isEmpty()) {
-                throw new EntityNotFoundException("There are now railway posts persisted");
+                throw new EntityNotFoundException("There are now railway posts persisted or in memory.\nPlease " +
+                        "upload a CSV-File or add railway posts to the database");
             }
             Optional<RailwayPost> matchingObject = this.transientRailwayPosts.stream().filter(
                     railwayPost -> railwayPost.getAbbreviation().equals(abbreviation.toUpperCase())).findFirst();
