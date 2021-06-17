@@ -44,7 +44,7 @@ public class RailwayPost extends BaseEntity {
 
     private String validUntil;
 
-    private Long netKey;
+    private String netKey;
 
     private Boolean scheduleRelevance;
 

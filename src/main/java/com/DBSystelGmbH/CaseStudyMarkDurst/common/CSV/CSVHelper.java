@@ -11,7 +11,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 public class CSVHelper {
@@ -54,7 +53,7 @@ public class CSVHelper {
                         csvRecord.get("RB"),
                         csvRecord.get("gültig von"),
                         csvRecord.get("gültig bis"),
-                        Long.valueOf(Optional.ofNullable(csvRecord.get("Netz-Key")).orElseGet(() -> String.valueOf(0L))),
+                        csvRecord.get("Netz-Key"),
                         Boolean.parseBoolean(csvRecord.get("Fpl-rel")),
                         Boolean.parseBoolean(csvRecord.get("Fpl-Gr"))
                 );
