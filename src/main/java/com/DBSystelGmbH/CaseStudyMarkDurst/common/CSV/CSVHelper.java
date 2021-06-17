@@ -36,7 +36,7 @@ public class CSVHelper {
 
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(new BOMInputStream(is), StandardCharsets.UTF_8));
              CSVParser csvParser = new CSVParser(reader1,
-                     CSVFormat.newFormat(';').withNullString("").withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
+                     CSVFormat.newFormat(';').withTrim().withNullString("").withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
 
             List<RailwayPost> railwayPosts = new ArrayList<>();
 
@@ -44,9 +44,9 @@ public class CSVHelper {
 
             for (CSVRecord csvRecord : csvRecords) {
                 RailwayPost railwayPost = new RailwayPost(
-                        csvRecord.get("Abk"),
-                        csvRecord.get("Name"),
-                        csvRecord.get("Kurzname"),
+                        csvRecord.get("Abk").trim().replaceAll(" +", " "),
+                        csvRecord.get("Name").trim().replaceAll(" +", " "),
+                        csvRecord.get("Kurzname").trim().replaceAll(" +", " "),
                         csvRecord.get("Typ"),
                         csvRecord.get("Betr-Zust"),
                         csvRecord.get("Primary location code"),
