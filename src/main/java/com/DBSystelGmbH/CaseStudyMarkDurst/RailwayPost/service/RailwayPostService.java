@@ -4,6 +4,8 @@ import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPost;
 import com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model.RailwayPostRepository;
 import com.DBSystelGmbH.CaseStudyMarkDurst.common.CSV.CSVHelper;
 import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.service.BaseService;
+import com.DBSystelGmbH.CaseStudyMarkDurst.common.exceptions.BaseChecks;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +18,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class RailwayPostService extends BaseService<RailwayPost> {
+public class RailwayPostService extends BaseService<RailwayPost> implements BaseChecks<RailwayPost> {
 
     private final RailwayPostRepository railwayPostRepository;
     private List<RailwayPost> transientRailwayPosts = new ArrayList<>();
@@ -26,7 +28,8 @@ public class RailwayPostService extends BaseService<RailwayPost> {
         this.railwayPostRepository = railwayPostRepository;
     }
 
-    public RailwayPost findByAbbreviation(String abbreviation) {
+    public RailwayPost findByAbbreviation(@NonNull String abbreviation) {
+        checkStringBlank(abbreviation);
 
         if (findAll().isEmpty()) {
             if (this.transientRailwayPosts.isEmpty()) {
@@ -48,7 +51,7 @@ public class RailwayPostService extends BaseService<RailwayPost> {
         log.info("All Railway Posts deleted");
     }
 
-    public void createRailwayPostsInMemory(MultipartFile file) {
+    public void createRailwayPostsInMemory(@NonNull MultipartFile file) {
         checkIfPersisted();
         try {
             this.transientRailwayPosts = convertCSVToBean(file);
@@ -58,7 +61,7 @@ public class RailwayPostService extends BaseService<RailwayPost> {
 
     }
 
-    public void createRailwayPostsInDatabase(MultipartFile file) {
+    public void createRailwayPostsInDatabase(@NonNull MultipartFile file) {
         checkIfPersisted();
         try {
             this.transientRailwayPosts = convertCSVToBean(file);
@@ -79,20 +82,6 @@ public class RailwayPostService extends BaseService<RailwayPost> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        entities = CSVUtils.read(RailwayPost.class, file);
-
-
-//        try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-//            CsvToBean<RailwayPost> csvToBeanBuilder = new CsvToBeanBuilder(reader)
-//                    .withType(RailwayPost.class)
-//                    .build();
-//
-//            entities = csvToBeanBuilder.parse();
-//            log.info("CSV-File successfully converted to Entity-Bean");
-//
-//        } catch (IOException ioException) {
-//            ioException.printStackTrace();
-//        }
         return entities;
     }
 

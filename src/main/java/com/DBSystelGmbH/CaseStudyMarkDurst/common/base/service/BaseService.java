@@ -39,6 +39,7 @@ public abstract class BaseService<T extends BaseEntity> {
 
     @Transactional
     public T update(@NonNull Long id, @NonNull T t) {
+
         T update = findById(id);
 
         BeanUtils.copyProperties(t, update);
