@@ -19,7 +19,7 @@ import java.util.Optional;
 public class RailwayPostService extends BaseService<RailwayPost> {
 
     private final RailwayPostRepository railwayPostRepository;
-    private List<RailwayPost> transientRailwayPosts;
+    private List<RailwayPost> transientRailwayPosts = new ArrayList<>();
 
     public RailwayPostService(RailwayPostRepository railwayPostRepository) {
         super(railwayPostRepository);
@@ -29,6 +29,9 @@ public class RailwayPostService extends BaseService<RailwayPost> {
     public RailwayPost findByAbbreviation(String abbreviation) {
 
         if (findAll().isEmpty()) {
+            if (this.transientRailwayPosts.isEmpty()) {
+                throw new EntityNotFoundException("There are now railway posts persisted");
+            }
             Optional<RailwayPost> matchingObject = this.transientRailwayPosts.stream().filter(
                     railwayPost -> railwayPost.getAbbreviation().equals(abbreviation.toUpperCase())).findFirst();
             if (matchingObject.isPresent()) {
