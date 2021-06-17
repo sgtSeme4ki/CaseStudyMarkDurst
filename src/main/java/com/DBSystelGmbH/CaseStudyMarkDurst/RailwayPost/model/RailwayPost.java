@@ -1,6 +1,7 @@
 package com.DBSystelGmbH.CaseStudyMarkDurst.RailwayPost.model;
 
 import com.DBSystelGmbH.CaseStudyMarkDurst.common.base.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class RailwayPost extends BaseEntity {
 
     @NotBlank
