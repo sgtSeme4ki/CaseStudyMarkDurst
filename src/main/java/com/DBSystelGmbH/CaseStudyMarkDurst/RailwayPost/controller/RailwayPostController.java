@@ -49,7 +49,7 @@ public class RailwayPostController extends BaseController<RailwayPost> {
 
     @GetMapping("/abk/{abbreviation}")
     public RailwayPost findByAbbreviation(@PathVariable String abbreviation) {
-        return railwayPostService.findByAbbreviation(abbreviation);
+        return railwayPostService.findByAbbreviation(abbreviation.toLowerCase());
     }
 
     @DeleteMapping

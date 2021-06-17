@@ -27,9 +27,10 @@ public class RailwayPostService extends BaseService<RailwayPost> {
     }
 
     public RailwayPost findByAbbreviation(String abbreviation) {
+
         if (findAll().isEmpty()) {
             Optional<RailwayPost> matchingObject = this.transientRailwayPosts.stream().filter(
-                    railwayPost -> railwayPost.getAbbreviation().equals(abbreviation)).findFirst();
+                    railwayPost -> railwayPost.getAbbreviation().equals(abbreviation.toUpperCase())).findFirst();
             if (matchingObject.isPresent()) {
                 return matchingObject.get();
             } else {
